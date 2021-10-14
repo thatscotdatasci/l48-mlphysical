@@ -8,7 +8,7 @@ from streamlit_app.abstract_classes.abstract_navigation_radio import AbstractNav
 
 class Lab1(AbstractNavigationRadio):
 
-    name = "House Price Prediction"
+    name = "Lab 1"
 
     def _action(self):
         """
