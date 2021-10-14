@@ -1,82 +1,40 @@
-import numpy as np
+import requests
+
+from PIL import Image
+from io import BytesIO
 import streamlit as st
-import scipy.stats as stat
-import matplotlib.pyplot as plt
 
-"""
-# L90 - Lab 1
+from streamlit_app.navigation_radios import Lab1
+from streamlit_app.navigation_manager.navigation_manager import NavigationManager
 
-## 1. Bernoulli Trial
+TSDS_ICON_URL = "https://raw.githubusercontent.com/thatscotdatasci/thatscotdatasci.github.io/master/assets/icons/tsds.ico"
 
-### Setup
+# Get the TSDS icon
+tsds_icon_data = requests.get(TSDS_ICON_URL)
+tsds_icon = Image.open(BytesIO(tsds_icon_data.content))
 
-"""
+# Set the page configuration
+st.set_page_config(
+    page_title="L90 Machine Learning and the Physical World",
+    page_icon=tsds_icon,
+    initial_sidebar_state="expanded",
+    layout="wide"
+)
 
-bias = st.number_input("Specify the true bias", min_value=0.0, max_value=1.0, value=0.3)
+# Display the TSDS logo in the sidebar
+st.sidebar.image(tsds_icon)
 
-size = int(st.number_input("Number of points to draw from each distribution", min_value=0, value=10, step=1))
+# App title in sidebar
+st.sidebar.markdown("""
+# L90 Machine Learning and the Physical World
 
-true_dist = stat.bernoulli(bias)
-x = true_dist.rvs(size=size)
+Labs from the L90 Machine Learning and the Physical World course at the University of Cambridge.
 
-fig, ax = plt.subplots()
-ax.hist(x)
-st.pyplot(fig)
+Click on the radio buttons below to view different examples.
+""")
 
-"""
-### Prior Specification
+# Instantiate navigation radio options
+navigation_radio_options = (Lab1, )
 
-We'll be using a beta prior - specify parameters alpha and beta.
-"""
-a = st.number_input("Alpha", min_value=0, value=30, step=1)
-b = st.number_input("Beta", min_value=0, value=30, step=1)
-
-prior_dist = stat.beta(a, b)
-prior = prior_dist.rvs(size=size)
-
-fig, ax = plt.subplots()
-ax.hist(prior)
-st.pyplot(fig)
-
-"""
-### Posterior Distribution
-
-"""
-
-param_range = np.linspace(0,1,100)
-index = np.arange(0,size,100)
-fig, ax = plt.subplots()
-
-error = []
-for i in index:
-    post_dist = stat.beta(np.sum(x[:i])+a,i-np.sum(x[:i])+b)
-    post_pdf = post_dist.pdf(param_range)
-    ax.plot(param_range, post_pdf)
-    error.append((i,np.abs(post_dist.mean()-bias)))
-    
-post_dist = stat.beta(np.sum(x)+a,size-np.sum(x)+b)
-post_pdf = post_dist.pdf(param_range)
-
-
-ax.plot(param_range, post_pdf)
-st.pyplot(fig)
-
-post_dist.mean()
-
-
-"""
-Impact of iterations
-"""
-
-iterations = int(st.number_input("Number of iterations to perform", min_value=100, max_value=10000, value=100, step=100))
-map_preds = []
-
-for i in np.arange(iterations):
-    x = true_dist.rvs(size=size)
-    map_preds.append((stat.beta(np.sum(x)+a,size-np.sum(x)+b).mean()))
-
-fig, ax = plt.subplots()
-ax.plot(map_preds)
-ax.set_ylim(0,1)
-
-st.pyplot(fig)
+# Content manager
+content_manager = NavigationManager(navigation_radio_options, Lab1)
