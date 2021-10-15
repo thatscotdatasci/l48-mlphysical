@@ -14,7 +14,11 @@ class Introduction(AbstractNavigationRadio):
         st.markdown("""
         ## 1.1 Bernoulli Trial
 
+        To begin with, we'll be looking at the age old problem of flipping a coin.
+
         ### Setup
+
+        Specification of the true bias of the coin - we hope to learn this in the subsequent steps.
 
         """)
 
@@ -43,11 +47,13 @@ class Introduction(AbstractNavigationRadio):
         )
         col1.plotly_chart(fig, use_container_width=True)
 
-        """
+        st.markdown("""
         ### Prior Specification
 
         We'll be using a beta prior - specify parameters alpha and beta.
         """
+        )
+
         a = st.number_input("Alpha", min_value=0, value=30, step=1)
         b = st.number_input("Beta", min_value=0, value=30, step=1)
 
@@ -58,10 +64,11 @@ class Introduction(AbstractNavigationRadio):
         fig.add_trace(go.Histogram(x=prior, nbinsx=10))
         st.plotly_chart(fig, use_container_width=True)
 
-        """
+        st.markdown("""
         ### Posterior Distribution
 
         """
+        )
 
         param_range = np.linspace(0,1,100)
         index = np.arange(0,size,100)
@@ -84,9 +91,10 @@ class Introduction(AbstractNavigationRadio):
         post_dist.mean()
 
 
+        st.markdown("""
+        ### Impact of iterations
         """
-        Impact of iterations
-        """
+        )
 
         iterations = int(st.number_input("Number of iterations to perform", min_value=100, max_value=10000, value=100, step=100))
         map_preds = []

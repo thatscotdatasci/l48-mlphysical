@@ -28,7 +28,7 @@ st.sidebar.image(tsds_icon)
 st.sidebar.markdown("""
 # L90 Machine Learning and the Physical World
 
-Labs from the L90 Machine Learning and the Physical World course at the University of Cambridge.
+Labs from the [L90 Machine Learning and the Physical World](https://mlatcl.github.io/mlphysical/) course at the University of Cambridge.
 
 Click on the radio buttons below to view different examples.
 """)
