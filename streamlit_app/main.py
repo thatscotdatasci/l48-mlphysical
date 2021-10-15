@@ -4,7 +4,7 @@ from PIL import Image
 from io import BytesIO
 import streamlit as st
 
-from streamlit_app.navigation_radios import Lab1
+from streamlit_app.navigation_radios import Introduction
 from streamlit_app.navigation_manager.navigation_manager import NavigationManager
 
 TSDS_ICON_URL = "https://raw.githubusercontent.com/thatscotdatasci/thatscotdatasci.github.io/master/assets/icons/tsds.ico"
@@ -34,7 +34,7 @@ Click on the radio buttons below to view different examples.
 """)
 
 # Instantiate navigation radio options
-navigation_radio_options = (Lab1, )
+navigation_radio_options = (Introduction, )
 
 # Content manager
-content_manager = NavigationManager(navigation_radio_options, Lab1)
+content_manager = NavigationManager(navigation_radio_options, Introduction)
