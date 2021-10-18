@@ -15,7 +15,7 @@ tsds_icon = Image.open(BytesIO(tsds_icon_data.content))
 
 # Set the page configuration
 st.set_page_config(
-    page_title="L90 Machine Learning and the Physical World",
+    page_title="L48 Machine Learning and the Physical World",
     page_icon=tsds_icon,
     initial_sidebar_state="expanded",
     layout="wide"
@@ -26,9 +26,9 @@ st.sidebar.image(tsds_icon)
 
 # App title in sidebar
 st.sidebar.markdown("""
-# L90 Machine Learning and the Physical World
+# L48 Machine Learning and the Physical World
 
-Labs from the [L90 Machine Learning and the Physical World](https://mlatcl.github.io/mlphysical/) course at the University of Cambridge.
+Labs from the [L48 Machine Learning and the Physical World](https://mlatcl.github.io/mlphysical/) course at the University of Cambridge.
 
 Click on the radio buttons below to view different examples.
 """)
