@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      HEROKU_APP: tsds-streamlit-l90
+      HEROKU_APP: tsds-streamlit-battery
     steps:
     - name: Checkout the source code
       uses: actions/checkout@v1
